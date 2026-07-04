@@ -100,6 +100,7 @@ section{padding:64px 30px;text-align:center}
   display:flex;flex-direction:column;gap:8px;align-items:center;
 }
 .tarjeta + .tarjeta{margin-top:26px}
+.solo-familia{display:none}
 .tarjeta .eyebrow{color:var(--oliva-500)}
 .tarjeta h3{font-family:'Italiana',serif;font-weight:400;font-size:1.75rem;color:var(--oliva-900)}
 .tarjeta .direccion{color:var(--tinta-suave);max-width:26ch}
@@ -180,11 +181,6 @@ body[data-version="amigos"] .solo-familia{display:none}
 }
 </style>
 
-<div class="toggle-version" role="group" aria-label="Vista previa de versión (solo borrador)">
-  <button type="button" data-v="familia" aria-pressed="true">Familia</button>
-  <button type="button" data-v="amigos" aria-pressed="false">Amigos</button>
-</div>
-
 <div class="pagina">
 
   <header class="hero">
@@ -237,7 +233,6 @@ body[data-version="amigos"] .solo-familia{display:none}
     </div>
 
     <div class="tarjeta solo-familia revela">
-      <p class="badge-familia">Solo con invitación</p>
       <p class="eyebrow">Recepción</p>
       <h3>Salón de recepción</h3>
       <p class="direccion">Cl 86A #69T-41<br>Bogotá</p>
@@ -356,14 +351,6 @@ if (WHATSAPP_RSVP) {
   btnRsvp.addEventListener("click", e => { e.preventDefault(); });
 }
 
-// Toggle familia/amigos (solo para el borrador)
-document.querySelectorAll(".toggle-version button").forEach(b => {
-  b.addEventListener("click", () => {
-    document.body.dataset.version = b.dataset.v;
-    document.querySelectorAll(".toggle-version button").forEach(x =>
-      x.setAttribute("aria-pressed", String(x === b)));
-  });
-});
 
 // Revelado al hacer scroll
 const io = new IntersectionObserver(entries => {
@@ -397,8 +384,7 @@ document.querySelectorAll(".revela").forEach(el => io.observe(el));
   if(!datos||!datos.n) return;
 
   // tipo: "a" = amigos (solo ceremonia), "f" = familia/lista (todo)
-  if(datos.t==="a") document.querySelectorAll(".solo-familia").forEach(el=>el.style.display="none");
-  const tog=document.querySelector(".toggle-version"); if(tog) tog.style.display="none";
+  if(datos.t==="f") document.querySelectorAll(".solo-familia").forEach(el=>el.style.display="flex");
 
   // banner personalizado bajo el hero
   const hero=document.querySelector("header.hero");
