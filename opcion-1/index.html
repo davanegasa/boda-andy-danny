@@ -370,3 +370,55 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll(".revela").forEach(el => io.observe(el));
 </script>
+
+<style>
+#inv-banner{
+  margin:-34px 22px 0;position:relative;z-index:5;
+  background:var(--oliva-700,var(--oliva,#3f4526));color:#fbfaf3;
+  border:1px solid rgba(251,250,243,.25);border-radius:18px;
+  padding:20px 22px;text-align:center;
+  box-shadow:0 12px 30px rgba(20,24,10,.25);
+  font-family:inherit;
+}
+#inv-banner .inv-para{font-size:.66rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;text-indent:.28em;opacity:.75;margin-bottom:6px}
+#inv-banner .inv-nombre{font-size:1.25rem;font-weight:600;line-height:1.25;text-wrap:balance}
+#inv-banner .inv-puestos{margin-top:10px;display:inline-block;font-size:.78rem;letter-spacing:.06em;border:1px dashed rgba(251,250,243,.5);border-radius:999px;padding:6px 16px}
+</style>
+<script>
+(function(){
+  function b64d(s){s=s.replace(/-/g,"+").replace(/_/g,"/");while(s.length%4)s+="=";
+    return new TextDecoder().decode(Uint8Array.from(atob(s),c=>c.charCodeAt(0)))}
+  let datos=null;
+  try{
+    const q=new URLSearchParams(location.search).get("i");
+    if(q) datos=JSON.parse(b64d(q));
+  }catch(e){ datos=null; }
+  if(!datos||!datos.n) return;
+
+  // tipo: "a" = amigos (solo ceremonia), "f" = familia/lista (todo)
+  if(datos.t==="a") document.querySelectorAll(".solo-familia").forEach(el=>el.style.display="none");
+  const tog=document.querySelector(".toggle-version"); if(tog) tog.style.display="none";
+
+  // banner personalizado bajo el hero
+  const hero=document.querySelector("header.hero");
+  if(hero){
+    const b=document.createElement("div");
+    b.id="inv-banner";
+    let html='<div class="inv-para">Invitación especial para</div>'+
+             '<div class="inv-nombre"></div>';
+    if(datos.t==="f"&&datos.p){
+      html+='<div class="inv-puestos">'+datos.p+(datos.p===1?" puesto reservado":" puestos reservados")+
+            (datos.k?" · incluye "+datos.k+(datos.k===1?" niño":" niños"):"")+"</div>";
+    }
+    b.innerHTML=html;
+    b.querySelector(".inv-nombre").textContent=datos.n;
+    hero.after(b);
+  }
+
+  // WhatsApp personalizado
+  const msg="¡Hola! "+(datos.p>1?"Somos "+datos.n+" y confirmamos nuestra asistencia ("+datos.p+" personas)":"Soy "+datos.n+" y confirmo mi asistencia")+" a la boda de Andy y Danny 🤍";
+  document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{
+    a.href="https://wa.me/573045797493?text="+encodeURIComponent(msg);
+  });
+})();
+</script>
