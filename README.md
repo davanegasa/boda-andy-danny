@@ -30,11 +30,15 @@ Sitio web estático con la invitación de boda. Un solo archivo HTML autoconteni
 .
 ├── index.html              # Invitación principal (archivo único ~700 KB)
 ├── opcion-1/index.html     # Redirección a la raíz (compatibilidad)
+├── enlaces/
+│   ├── index.html          # Página para organizadores (descargar CSV)
+│   └── invitados.csv       # Lista exportable para Excel / WhatsApp
 ├── docs/
 │   ├── PERSONALIZACION.md  # Parámetros URL y edición de la lista
-│   └── ENLACES-INVITADOS.md # Tabla de enlaces ?f=1 … ?f=79
+│   ├── ENLACES-INVITADOS.md # Tabla de enlaces ?f=1 … ?f=79
+│   └── ENLACES-INVITADOS.csv # Mismo CSV que enlaces/invitados.csv
 └── scripts/
-    └── generar-enlaces.mjs # Regenera ENLACES-INVITADOS.md
+    └── generar-enlaces.mjs # Regenera MD, CSV y página de descarga
 ```
 
 ## Tipos de enlace
@@ -58,7 +62,7 @@ https://davanegasa.github.io/boda-andy-danny/?f=14
 - Revela recepción y mapa esquemático.
 - Personaliza el mensaje de confirmación por WhatsApp.
 
-Tabla completa: [docs/ENLACES-INVITADOS.md](docs/ENLACES-INVITADOS.md)
+**Descargar enlaces:** [enlaces/](enlaces/) (página con botón CSV) · [docs/ENLACES-INVITADOS.csv](docs/ENLACES-INVITADOS.csv) · [docs/ENLACES-INVITADOS.md](docs/ENLACES-INVITADOS.md)
 
 ### Personalizado manual (parámetro `i`)
 
@@ -101,11 +105,22 @@ const WHATSAPP_RSVP = "573045797493";
 const LISTA_B64 = "..."; // [nombre, puestos, niños] × N familias
 ```
 
-Tras modificar `LISTA_B64`, regenerar la tabla de enlaces:
+Tras modificar `LISTA_B64`, regenerar la tabla, el CSV y la página de descarga:
 
 ```bash
 node scripts/generar-enlaces.mjs
 ```
+
+### Descargar la lista de enlaces
+
+| Método | Dónde |
+|--------|--------|
+| **Página web** | `https://davanegasa.github.io/boda-andy-danny/enlaces/` — tabla + botón «Descargar CSV» |
+| **CSV directo** | [docs/ENLACES-INVITADOS.csv](docs/ENLACES-INVITADOS.csv) o [enlaces/invitados.csv](enlaces/invitados.csv) |
+| **GitHub** | Abrir el CSV en el repo → botón **Raw** → guardar archivo |
+| **Local** | `node scripts/generar-enlaces.mjs` y abrir `enlaces/invitados.csv` en Excel |
+
+La página `enlaces/` no está enlazada desde la invitación pública (solo para organizadores).
 
 ### Notas de la revisión técnica
 

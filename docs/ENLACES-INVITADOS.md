@@ -2,6 +2,8 @@
 
 Generado automáticamente desde `LISTA_B64` en `index.html`.
 
+Descargar en CSV: [ENLACES-INVITADOS.csv](ENLACES-INVITADOS.csv) · Página web: [../enlaces/](../enlaces/)
+
 | # | Familia / invitado | Puestos | Niños | Enlace |
 |---:|---|---:|---:|---|
 | 1 | Leonardo González y Olma Martínez | 2 | 0 | [?f=1](https://davanegasa.github.io/boda-andy-danny/?f=1) |

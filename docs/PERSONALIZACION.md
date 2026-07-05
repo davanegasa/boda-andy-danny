@@ -100,7 +100,7 @@ Sin personalización, el mensaje genérico es: *«¡Hola! Confirmo mi asistencia
 1. Decodificar `LISTA_B64` actual (ver script abajo).
 2. Modificar el arreglo JSON: agregar, quitar o editar filas `[nombre, puestos, niños]`.
 3. Volver a codificar en base64 estándar y pegar en `const LISTA_B64 = "..."`.
-4. Ejecutar `node scripts/generar-enlaces.mjs` para actualizar [ENLACES-INVITADOS.md](ENLACES-INVITADOS.md).
+4. Ejecutar `node scripts/generar-enlaces.mjs` para actualizar [ENLACES-INVITADOS.md](ENLACES-INVITADOS.md), [ENLACES-INVITADOS.csv](ENLACES-INVITADOS.csv) y la página [../enlaces/](../enlaces/).
 
 ```javascript
 // Decodificar lista actual
