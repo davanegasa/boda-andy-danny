@@ -152,14 +152,14 @@ document.querySelectorAll("tbody tr").forEach(tr => {
   const puestos = parseInt(tds[2].textContent, 10) || 1;
   const enlace = tds[4].querySelector("a").href;
   const plural = puestos > 1;
-  const msg = "Hola *" + nombres + "* \u{1F90D}\n\n" +
+  const msg = "Hola *" + nombres + "* \u2764\uFE0F\n\n" +
     (plural
       ? "Con mucha alegr\u00EDa queremos invitarlos a nuestro matrimonio. Aqu\u00ED est\u00E1 su invitaci\u00F3n especial:\n\n"
       : "Con mucha alegr\u00EDa queremos invitarte a nuestro matrimonio. Aqu\u00ED est\u00E1 tu invitaci\u00F3n especial:\n\n") +
     enlace + "\n\n" +
-    (plural ? "Los esperamos el *s\u00E1bado 1 de agosto* \u{1F5D3}\uFE0F\nPor favor confirmen su asistencia antes del *20 de julio* \u{1F64F}\n\n"
-            : "Te esperamos el *s\u00E1bado 1 de agosto* \u{1F5D3}\uFE0F\nPor favor confirma tu asistencia antes del *20 de julio* \u{1F64F}\n\n") +
-    "Con cari\u00F1o,\n*Andr\u00E9s Mauricio & Karen Daniela* \u{1FAD2}";
+    (plural ? "Los esperamos el *s\u00E1bado 1 de agosto*.\nPor favor confirmen su asistencia antes del *20 de julio* \u2728\n\n"
+            : "Te esperamos el *s\u00E1bado 1 de agosto*.\nPor favor confirma tu asistencia antes del *20 de julio* \u2728\n\n") +
+    "Con cari\u00F1o,\n*Andr\u00E9s Mauricio & Karen Daniela*";
   const td = document.createElement("td");
   const a = document.createElement("a");
   a.className = "btn-wa";
