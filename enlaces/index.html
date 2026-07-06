@@ -32,6 +32,11 @@
     tr:last-child td{border-bottom:0}
     td a{word-break:break-all;color:var(--oliva)}
     .pie{margin-top:20px;font-size:.8rem;color:#5c5f4c}
+    .btn-wa{
+      display:inline-block;background:#25D366;color:#fff;text-decoration:none;
+      padding:7px 14px;border-radius:999px;font-weight:600;font-size:.8rem;white-space:nowrap;
+    }
+    .btn-wa:hover{background:#1eb857}
   </style>
 </head>
 <body>
@@ -52,7 +57,7 @@
     <div class="tabla-wrap">
       <table>
         <thead>
-          <tr><th>#</th><th>Familia / invitado</th><th>Puestos</th><th>Niños</th><th>Enlace</th></tr>
+          <tr><th>#</th><th>Familia / invitado</th><th>Puestos</th><th>Niños</th><th>Enlace</th><th>Enviar</th></tr>
         </thead>
         <tbody>
 <tr><td>1</td><td>Leonardo González y Olma Martínez</td><td>2</td><td>0</td><td><a href="https://davanegasa.github.io/boda-andy-danny/?f=1">https://davanegasa.github.io/boda-andy-danny/?f=1</a></td></tr>
@@ -140,5 +145,29 @@
 
     <p class="pie">Última generación: 2026-07-05 · Base: https://davanegasa.github.io/boda-andy-danny/</p>
   </div>
+<script>
+document.querySelectorAll("tbody tr").forEach(tr => {
+  const tds = tr.children;
+  const nombres = tds[1].textContent.trim();
+  const puestos = parseInt(tds[2].textContent, 10) || 1;
+  const enlace = tds[4].querySelector("a").href;
+  const plural = puestos > 1;
+  const msg = "Hola *" + nombres + "* \u{1F90D}\n\n" +
+    (plural
+      ? "Con mucha alegr\u00EDa queremos invitarlos a nuestro matrimonio. Aqu\u00ED est\u00E1 su invitaci\u00F3n especial:\n\n"
+      : "Con mucha alegr\u00EDa queremos invitarte a nuestro matrimonio. Aqu\u00ED est\u00E1 tu invitaci\u00F3n especial:\n\n") +
+    enlace + "\n\n" +
+    (plural ? "Los esperamos el *s\u00E1bado 1 de agosto* \u{1F5D3}\uFE0F\nPor favor confirmen su asistencia antes del *20 de julio* \u{1F64F}\n\n"
+            : "Te esperamos el *s\u00E1bado 1 de agosto* \u{1F5D3}\uFE0F\nPor favor confirma tu asistencia antes del *20 de julio* \u{1F64F}\n\n") +
+    "Con cari\u00F1o,\n*Andr\u00E9s Mauricio & Karen Daniela* \u{1FAD2}";
+  const td = document.createElement("td");
+  const a = document.createElement("a");
+  a.className = "btn-wa";
+  a.href = "https://wa.me/?text=" + encodeURIComponent(msg);
+  a.target = "_blank"; a.rel = "noopener";
+  a.textContent = "WhatsApp";
+  td.appendChild(a); tr.appendChild(td);
+});
+</script>
 </body>
 </html>
