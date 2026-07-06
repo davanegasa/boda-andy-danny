@@ -62,7 +62,7 @@ h1,h2{font-family:'Italiana', 'Cormorant Garamond', serif;font-weight:400;text-w
   padding:0 28px 52px;text-align:center;color:var(--blanco);
   display:flex;flex-direction:column;gap:14px;align-items:center;
 }
-.hero .eyebrow{color:var(--salvia-suave)}
+.hero .eyebrow{color:var(--salvia-suave);font-size:1rem;font-weight:700}
 .hero h1{font-size:clamp(2.2rem,10vw,3.3rem);letter-spacing:.02em}
 .hero h1 .linea{display:block}
 .hero h1 .amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.62em;vertical-align:.08em;padding:0 .06em}
@@ -241,14 +241,13 @@ body[data-version="amigos"] .solo-familia{display:none}
 
   <section class="lugares">
     <div class="seccion-titulo revela">
-      <p class="eyebrow">El gran día</p>
-      <h2>Dónde celebramos</h2>
+      <h2>Dónde celebraremos</h2>
     </div>
 
     <div class="tarjeta revela">
       <p class="eyebrow">Ceremonia</p>
       <h3>Iglesia La Biblia Dice</h3>
-      <p class="direccion">Ac 116 #70C-58, Suba<br>Bogotá</p>
+      <p class="direccion">Av. Calle 116 #70C-58<br>Bogotá</p>
       <p class="hora">2:00 PM</p>
       <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Iglesia+La+Biblia+Dice%2C+Ac+116+%2370C-58%2C+Bogot%C3%A1" target="_blank" rel="noopener">Ver ubicación</a>
     </div>
@@ -258,6 +257,7 @@ body[data-version="amigos"] .solo-familia{display:none}
       <h3>Salón de recepción</h3>
       <p class="direccion">Cl 86A #69T-41<br>Bogotá</p>
       <p class="hora">4:00 PM</p>
+      <p class="eyebrow" style="margin-top:14px;color:var(--oliva-500)">Lluvia de 💌</p>
       <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Cl+86A+%2369T-41%2C+Bogot%C3%A1" target="_blank" rel="noopener">Ver ubicación</a>
     </div>
 
@@ -274,7 +274,7 @@ body[data-version="amigos"] .solo-familia{display:none}
           <circle cx="70" cy="60" r="9" fill="#3e4527"/>
           <circle cx="70" cy="60" r="15" fill="none" stroke="#3e4527" stroke-width="1.4" opacity=".45"/>
           <text x="92" y="38" font-family="Cormorant Garamond, Georgia, serif" font-weight="600" font-size="15" fill="#2b2d22">Iglesia La Biblia Dice</text>
-          <text x="92" y="88" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="13" fill="#5c5f4c">Ac 116 #70C-58</text>
+          <text x="92" y="88" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="13" fill="#5c5f4c">Av. Calle 116 #70C-58</text>
         </g>
         <g>
           <circle cx="300" cy="200" r="9" fill="#6b7345"/>
@@ -300,7 +300,7 @@ body[data-version="amigos"] .solo-familia{display:none}
       <div class="swatch"><div class="circulo" style="background:#6b7345"></div><span>Verde oliva</span></div>
       <div class="swatch"><div class="circulo" style="background:#fbfaf3"></div><span>Blanco</span></div>
     </div>
-    <p>Estos dos colores quedan reservados para los novios</p>
+    <p>Nos reservamos estos colores</p>
   </section>
 
   <section class="revela" style="background:var(--crema)">
@@ -360,7 +360,7 @@ if (FECHA_BODA) {
   zona.innerHTML = '<div class="cd-grid">' +
     ["dias","horas","min","seg"].map(k =>
       '<div class="cd-celda"><div class="cd-num" id="cd-' + k + '">0</div><div class="cd-label">' + k + '</div></div>'
-    ).join("") + "</div>";
+    ).join("") + '</div><p class="eyebrow" style="margin-top:22px;color:var(--salvia-suave)">Para el gran día</p>';
   const objetivo = new Date(FECHA_BODA).getTime();
   const tick = () => {
     let d = Math.max(0, objetivo - Date.now());
@@ -436,13 +436,8 @@ document.querySelectorAll(".revela").forEach(el => io.observe(el));
   if(hero){
     const b=document.createElement("div");
     b.id="inv-banner";
-    let html='<div class="inv-para">Invitación especial para</div>'+
+    b.innerHTML='<div class="inv-para">Invitación especial para</div>'+
              '<div class="inv-nombre"></div>';
-    if(datos.t==="f"&&datos.p){
-      html+='<div class="inv-puestos">'+datos.p+(datos.p===1?" puesto reservado":" puestos reservados")+
-            (datos.k?" · incluye "+datos.k+(datos.k===1?" niño":" niños"):"")+"</div>";
-    }
-    b.innerHTML=html;
     b.querySelector(".inv-nombre").textContent=datos.n;
     hero.after(b);
   }
