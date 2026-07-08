@@ -233,7 +233,7 @@ body[data-version="amigos"] .solo-familia{display:none}
   </section>
 
   <section class="countdown revela">
-    <p class="eyebrow">Faltan cada vez menos</p>
+    <p class="eyebrow">Falta cada vez menos para el gran día</p>
     <div id="cd-zona">
       <p class="cd-pendiente">Muy pronto te contaremos la fecha exacta&hellip;</p>
     </div>
@@ -364,7 +364,7 @@ if (FECHA_BODA) {
   zona.innerHTML = '<div class="cd-grid">' +
     ["dias","horas","min","seg"].map(k =>
       '<div class="cd-celda"><div class="cd-num" id="cd-' + k + '">0</div><div class="cd-label">' + k + '</div></div>'
-    ).join("") + '</div><p class="eyebrow" style="margin-top:22px;color:var(--salvia-suave)">Para el gran día</p>';
+    ).join("") + "</div>";
   const objetivo = new Date(FECHA_BODA).getTime();
   const tick = () => {
     let d = Math.max(0, objetivo - Date.now());
